@@ -59,3 +59,190 @@ footer a {
     color: var(--contrast-color, inherit);
     font-weight: 500;
 }
+
+/* Стилизация приложения */
+[mv-app] {
+    width: 900px;
+    margin: 0 auto;
+    padding: 30px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    background-color: var(--contrast-color, inherit);
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+}
+
+.main-part,
+.notification {
+    grid-column: 1 / span 2;
+}
+
+.basic-parameters [property=description] {
+    padding: 10px;
+    margin: 10px;
+}
+
+/* Стилизация примечаний */
+.info-wrap {
+    position: relative;
+    border-left: .3rem solid transparent;
+    padding: 10px 20px;
+    margin: 10px;
+    border-left-color: var(--description-color, inherit);
+}
+
+.info-wrap__icon {
+    border-radius: 50%;
+    position: absolute;
+    z-index: 1;
+    left: -0.65rem;
+    top: 1.3rem;
+    width: 17px;
+    height: 17px;
+    background-color: var(--contrast-color, inherit);
+}
+
+.info-wrap__icon .svg-icon {
+    vertical-align: top;
+    fill: var(--description-color, inherit);
+    stroke: none;
+    display: inline-block;
+}
+
+/* Стилизация списков */
+.checkbox {
+    display: none;
+}
+
+.checkbox-custom {
+    width: 25px;
+    height: 25px;
+    margin: 0 10px;
+    border: 2px solid var(--main-color, inherit);
+    border-radius: 3px;
+    position: relative;
+}
+
+.checkbox-custom,
+.label {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.checkbox:checked + .checkbox-custom::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    bottom: 2px;
+    left: 2px;
+    background: var(--main-color, inherit);
+    border-radius: 2px;
+}
+
+.list-item {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    margin: 20px 0;
+}
+
+/* Стилизация инструкции к элементам списка */
+.list-instruction {
+    padding: 20px 10px 10px;
+    font-weight: 500;
+    border-bottom: .1rem solid var(--line-color, inherit);
+}
+
+/* Стилизация инструкций завершению работы с чек-листом */
+[property=done] [property=description] {
+    margin: 10px;
+    padding: 10px;
+}
+
+.done-description:not([mv-mode=edit])::after {
+    content: 'Отметить как выполненное';
+    display: block;
+    width: 200px;
+    text-align: center;
+    background-color: var(--main-color, inherit);
+    color: var(--contrast-color, inherit);
+    border: .1rem solid var(--main-color, inherit);
+    border-radius: 0.8rem;
+    padding: 7px;
+    margin: 10px 5px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* Скрываем ненужные элементы в режиме просмотра */
+.hidden:not([mv-mode=edit]) {
+    display: none;
+}
+
+/* И отображаем их в режиме редактирования */
+[mv-mode=edit] .hidden:not(.always-hidden) {
+    display: block;
+}
+
+/* Стилизация заголовков разделов в режиме редактирования */
+[mv-app] h3,
+[mv-app] h4,
+[mv-app] h5 {
+    color: var(--description-color, inherit);
+}
+
+/* Стилизация заголовков блоков в режиме редактирования */
+.title {
+    margin: 10px;
+    font-style: italic;
+    color: var(--main-color, inherit);
+}
+
+/* Стилизация редактируемых блоков */
+[property]:not(select)[mv-mode=edit] {
+    border: 1px solid var(--main-color, inherit);
+    min-height: 50px;
+    margin: 0 10px;
+    padding: 10px;
+}
+
+/* Стилизация панели инструментов */
+.mv-bar.mv-ui:not(.mv-fixed) {
+    grid-column: 1 / span 2;
+}
+
+/* Стилизация кнопок добавления элементов чек-листа */
+button.mv-add {
+    background-color: var(--main-color, inherit);
+    color: var(--contrast-color, inherit);
+    border: .1rem solid var(--main-color, inherit);
+    border-radius: 0.8rem;
+    padding: 7px;
+    margin: 10px 5px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.2s ease-out;
+}
+
+button.mv-add:hover {
+    background-color: var(--hover-color, inherit);
+    color: var(--main-color, inherit);
+}
+
+/* Стилизация визуального редактора */
+.tinymce ul {
+    padding-left: 30px;
+    list-style-type: none;
+}
+
+.tinymce li {
+    position: relative;
+}
+
+.tinymce li::before {
+    position: absolute;
+    left: -30px;
+    content: '—';
+    display: inline-block;
+    padding: 0 5px;
+}
