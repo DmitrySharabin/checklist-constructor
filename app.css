@@ -18,7 +18,10 @@ html {
 
 body {
     display: grid;
+    grid-template-rows: auto 1fr auto;
     grid-row-gap: 30px;
+    align-items: start;
+    height: 100vh;
     box-sizing: border-box;
     background-color: var(--bg-color, inherit);
     color: var(--text-color, inherit);
