@@ -2,7 +2,7 @@
 
 Mavo.Plugins.register("clear", {
 	dependencies: [
-		"mavo-clear.css"
+		"../css/mavo-clear.css"
 	],
 	extend: {
 		Mavo: {
