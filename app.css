@@ -249,3 +249,18 @@ button.mv-add:hover {
     display: inline-block;
     padding: 0 5px;
 }
+
+/* Стилизация раздела с иконкой + предпросмотр иконки */
+[property="icon"] {
+    position: relative;
+}
+
+[property="icon"] img {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 1em;
+    width: 7em;
+    max-height: 80%;
+}
