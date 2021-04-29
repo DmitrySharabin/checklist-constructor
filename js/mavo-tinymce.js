@@ -3,7 +3,13 @@
 var parser, serializer;
 
 Mavo.Plugins.register("tinymce", {
-	ready: $.include(self.tinymce, "https://cdn.tinymce.com/4/tinymce.min.js").then(() => {
+	ready: Promise.all([
+		$.include(self.tinymce, "https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.9.11/tinymce.min.js"),
+		$.load("https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.9.11/themes/modern/theme.min.js"),
+		$.load("https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.9.11/plugins/tabfocus/plugin.js"),
+		$.load("https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.9.11/plugins/paste/plugin.js"),
+		$.load("https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.9.11/plugins/lists/plugin.js")
+	]).then(() => {
 		parser = new tinymce.html.DomParser();
 		serializer = new tinymce.html.Serializer();
 	})
@@ -46,7 +52,7 @@ Mavo.Elements.register(".tinymce", {
 	},
 	setValue: (element, value) => {
 		const content = serializer.serialize(parser.parse(value));
-		
+
 		if (!element.tinymce) {
 			element.innerHTML = content;
 		}
