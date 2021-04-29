@@ -32,7 +32,10 @@ Mavo.Elements.register(".tinymce", {
 				inline: true,
 				menubar: false,
 				toolbar: "bold italic | bullist numlist",
-				plugins: "image code link table lists media tabfocus"
+				plugins: "paste lists tabfocus",
+				invalid_styles: "color background font-size font-weight font-family font-style font", // https://medium.com/@martin.sikora/how-to-make-tinymce-to-output-clean-html-b4854daeb286
+				invalid_elements: "span,h1,h2,h3,h4,h5,h6,div",
+				language: "ru"
 			}).then(editors => {
 				this.element.tinymce = editors[0];
 
@@ -43,12 +46,17 @@ Mavo.Elements.register(".tinymce", {
 		});
 	},
 	done: function() {
-		if (this.tinymce) {
-			tinymce.EditorManager.execCommand("mceRemoveEditor", true, this.tinymce.id);
+		if (this.element.tinymce) {
+			tinymce.EditorManager.execCommand("mceRemoveEditor", true, this.element.tinymce.id);
 		}
 	},
 	getValue: (element) => {
-		return element.tinymce ? element.tinymce.getContent() : element.innerHTML;
+		// Добавил в конец возврат пробела, если element.innerHTML является пустой строкой.
+		// Это странно, но при чтении файла свойства, редактируемые с помощью tinymce, должны что-то считывать из него.
+		// Если соответствующего значения в файле нет, возникает ошибка “Неверный формат файла”.
+		// Не помню, чтобы такая ошибка была раньше, но здесь возникла. Проверю, возникает ли она в других случаях,
+		// и, если что, заведу issue. Пока пусть будут такие костыли.
+		return element.tinymce ? element.tinymce.getContent() : element.innerHTML || " ";
 	},
 	setValue: (element, value) => {
 		const content = serializer.serialize(parser.parse(value));
