@@ -31,7 +31,7 @@ Mavo.Elements.register(".tinymce", {
 				target: this.element,
 				inline: true,
 				menubar: false,
-				toolbar: "styleselect | bold italic | image link | table | bullist numlist",
+				toolbar: "bold italic | bullist numlist",
 				plugins: "image code link table lists media tabfocus"
 			}).then(editors => {
 				this.element.tinymce = editors[0];
